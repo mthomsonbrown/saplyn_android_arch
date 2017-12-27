@@ -1,5 +1,6 @@
 package com.slashandhyphen.saplyn_android_arch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,5 +50,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         Snackbar.make(v, "Hello", Snackbar.LENGTH_INDEFINITE).show();
+        Intent myIntent = new Intent(this, HomeActivity.class);
+        startActivity(myIntent);
     }
 }
