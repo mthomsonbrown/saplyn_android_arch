@@ -10,10 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button button_home;
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,6 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Snackbar.make(v, "Hello", Snackbar.LENGTH_INDEFINITE).show();
         Intent myIntent = new Intent(this, HomeActivity.class);
         startActivity(myIntent);
     }
