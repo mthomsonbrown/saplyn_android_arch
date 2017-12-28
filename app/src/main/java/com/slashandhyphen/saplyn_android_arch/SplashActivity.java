@@ -2,7 +2,6 @@ package com.slashandhyphen.saplyn_android_arch;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,13 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button button_home;
-    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
