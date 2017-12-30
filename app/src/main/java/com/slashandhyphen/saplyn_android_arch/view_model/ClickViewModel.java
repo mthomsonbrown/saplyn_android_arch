@@ -1,10 +1,12 @@
-package com.slashandhyphen.saplyn_android_arch;
+package com.slashandhyphen.saplyn_android_arch.view_model;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+
+import com.slashandhyphen.saplyn_android_arch.model.model.click.Click;
+import com.slashandhyphen.saplyn_android_arch.model.model.click.ClickRepository;
 
 import java.util.List;
 
@@ -14,21 +16,21 @@ import javax.inject.Inject;
  * Created by Mike on 12/27/2017.
  */
 
-public class ClicksViewModel extends ViewModel {
+public class ClickViewModel extends ViewModel {
     LiveData<List<Click>> clicks;
-    private ClicksRepository clicksRepository;
+    private ClickRepository clickRepository;
 
     @Inject
-    public ClicksViewModel(ClicksRepository clicksRepository) {
-        this.clicksRepository = clicksRepository;
+    public ClickViewModel(ClickRepository clickRepository) {
+        this.clickRepository = clickRepository;
     }
 
     public LiveData<List<Click>> getClicks() {
-        return clicksRepository.getClicks();
+        return clickRepository.getClicks();
     }
 
     public LiveData<String> getStringClicks() {
-        return Transformations.map(clicksRepository.getClicks(), clicks -> {
+        return Transformations.map(clickRepository.getClicks(), clicks -> {
             if(clicks != null) {
                 return Integer.toString(clicks.size());
             }
@@ -37,25 +39,25 @@ public class ClicksViewModel extends ViewModel {
     }
 
     public void click() {
-        clicksRepository.addClick(new Click(System.currentTimeMillis()));
+        clickRepository.addClick(new Click(System.currentTimeMillis()));
     }
 
     public void click(long time) {
-        clicksRepository.addClick(new Click(time));
+        clickRepository.addClick(new Click(time));
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
-        private ClicksRepository clicksRepository;
+        private ClickRepository clickRepository;
 
-        public Factory(ClicksRepository clicksRepository) {
-            this.clicksRepository = clicksRepository;
+        public Factory(ClickRepository clickRepository) {
+            this.clickRepository = clickRepository;
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new ClicksViewModel(clicksRepository);
+            return (T) new ClickViewModel(clickRepository);
         }
     }
 }

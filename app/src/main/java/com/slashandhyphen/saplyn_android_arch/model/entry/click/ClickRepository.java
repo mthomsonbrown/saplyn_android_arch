@@ -1,7 +1,9 @@
-package com.slashandhyphen.saplyn_android_arch;
+package com.slashandhyphen.saplyn_android_arch.model.model.click;
 
 import android.arch.lifecycle.LiveData;
 import android.util.Log;
+
+import com.slashandhyphen.saplyn_android_arch.model.entry.EntryDatabase;
 
 import java.util.List;
 
@@ -14,10 +16,10 @@ import static android.content.ContentValues.TAG;
  * Created by Mike on 12/27/2017.
  */
 
-public class ClicksRepository {
+public class ClickRepository {
     private final EntryDatabase database;
 
-    public ClicksRepository(EntryDatabase database) {
+    public ClickRepository(EntryDatabase database) {
         this.database = database;
     }
 

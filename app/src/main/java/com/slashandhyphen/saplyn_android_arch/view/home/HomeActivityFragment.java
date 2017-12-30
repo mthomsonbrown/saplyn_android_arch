@@ -1,4 +1,4 @@
-package com.slashandhyphen.saplyn_android_arch;
+package com.slashandhyphen.saplyn_android_arch.view.home;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.constraint.ConstraintLayout;
@@ -10,13 +10,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+import com.slashandhyphen.saplyn_android_arch.model.entry.EntryDatabase;
+import com.slashandhyphen.saplyn_android_arch.model.model.click.ClickRepository;
+import com.slashandhyphen.saplyn_android_arch.view_model.ClickViewModel;
+
+import com.slashandhyphen.saplyn_android_arch.R;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class HomeActivityFragment extends Fragment implements View.OnClickListener {
     private EntryDatabase database;
-    private ClicksRepository clicksRepository;
-    private ClicksViewModel clicksViewModel;
+    private ClickRepository clickRepository;
+    private ClickViewModel clickViewModel;
 
     private ConstraintLayout layout;
     private TextView textClicks;
@@ -36,17 +43,17 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
         database = EntryDatabase.getInstance(this.getContext());
 
-        clicksRepository = new ClicksRepository(database);
-        ClicksViewModel.Factory factory = new ClicksViewModel.Factory(clicksRepository);
-        clicksViewModel = ViewModelProviders.of(this, factory)
-                .get(ClicksViewModel.class);
+        clickRepository = new ClickRepository(database);
+        ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);
+        clickViewModel = ViewModelProviders.of(this, factory)
+                .get(ClickViewModel.class);
 
         layout = (ConstraintLayout) inflater.inflate(R.layout.fragment_home, container, false);
         textClicks = layout.findViewById(R.id.text_clicks);
         buttonClick = layout.findViewById(R.id.button);
         buttonClick.setOnClickListener(this);
-        clicksViewModel = ViewModelProviders.of(this).get(ClicksViewModel.class);
-        clicksViewModel.getStringClicks().observe(this, clicks -> {
+        clickViewModel = ViewModelProviders.of(this).get(ClickViewModel.class);
+        clickViewModel.getStringClicks().observe(this, clicks -> {
             textClicks.setText(clicks);
         });
         return layout;
@@ -55,7 +62,7 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button) {
-            clicksViewModel.click();
+            clickViewModel.click();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.slashandhyphen.saplyn_android_arch;
+package com.slashandhyphen.saplyn_android_arch.model.entry;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -8,6 +8,9 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import com.slashandhyphen.saplyn_android_arch.model.model.click.Click;
+import com.slashandhyphen.saplyn_android_arch.model.model.click.ClickDao;
 
 import java.util.List;
 
