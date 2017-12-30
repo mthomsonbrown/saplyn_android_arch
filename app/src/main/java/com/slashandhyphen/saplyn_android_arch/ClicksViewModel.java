@@ -1,6 +1,8 @@
 package com.slashandhyphen.saplyn_android_arch;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
@@ -23,6 +25,15 @@ public class ClicksViewModel extends ViewModel {
 
     public LiveData<List<Click>> getClicks() {
         return clicksRepository.getClicks();
+    }
+
+    public LiveData<String> getStringClicks() {
+        return Transformations.map(clicksRepository.getClicks(), clicks -> {
+            if(clicks != null) {
+                return Integer.toString(clicks.size());
+            }
+            else return "0";
+        });
     }
 
     public void click() {

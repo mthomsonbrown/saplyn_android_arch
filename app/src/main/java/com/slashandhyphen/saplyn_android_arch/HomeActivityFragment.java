@@ -46,9 +46,8 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
         buttonClick = layout.findViewById(R.id.button);
         buttonClick.setOnClickListener(this);
         clicksViewModel = ViewModelProviders.of(this).get(ClicksViewModel.class);
-        clicksViewModel.getClicks().observe(this, clicks -> {
-            if(clicks != null)
-                textClicks.setText(Integer.toString(clicks.size()));
+        clicksViewModel.getStringClicks().observe(this, clicks -> {
+            textClicks.setText(clicks);
         });
         return layout;
     }
