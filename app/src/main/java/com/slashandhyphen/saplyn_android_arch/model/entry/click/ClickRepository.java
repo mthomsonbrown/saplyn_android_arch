@@ -28,6 +28,10 @@ public class ClickRepository {
         return database.loadAllClicks();
     }
 
+    public LiveData<List<Click>> getClicksInRange(long timeStart, long timeEnd) {
+        return database.loadClicksInRange(timeStart, timeEnd);
+    }
+
     public void addClick(Click click) {
         database.saveClick(click)
                 .subscribeOn(Schedulers.io())

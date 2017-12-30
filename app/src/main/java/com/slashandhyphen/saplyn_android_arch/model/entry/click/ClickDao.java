@@ -19,4 +19,7 @@ public interface ClickDao {
 
     @Query("SELECT * FROM clicks")
     LiveData<List<Click>> loadAllClicks();
+
+    @Query(("SELECT * FROM clicks WHERE time BETWEEN :timeStart AND :timeEnd"))
+    LiveData<List<Click>> loadClicksInRange(long timeStart, long timeEnd);
 }

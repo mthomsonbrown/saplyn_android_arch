@@ -27,6 +27,7 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
     private ConstraintLayout layout;
     private TextView textClicks;
+    private TextView textClicksTotal;
     private Button buttonClick;
 
     public HomeActivityFragment() {
@@ -50,11 +51,15 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
         layout = (ConstraintLayout) inflater.inflate(R.layout.fragment_home, container, false);
         textClicks = layout.findViewById(R.id.text_clicks);
+        textClicksTotal = layout.findViewById(R.id.text_total_clicks);
         buttonClick = layout.findViewById(R.id.button);
         buttonClick.setOnClickListener(this);
         clickViewModel = ViewModelProviders.of(this).get(ClickViewModel.class);
-        clickViewModel.getStringClicks().observe(this, clicks -> {
+        clickViewModel.getStringClicksPerDay().observe(this, clicks -> {
             textClicks.setText(clicks);
+        });
+        clickViewModel.getStringClicks().observe(this, clicks -> {
+            textClicksTotal.setText(clicks);
         });
         return layout;
     }

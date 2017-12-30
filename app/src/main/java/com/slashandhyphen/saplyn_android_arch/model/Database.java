@@ -63,6 +63,10 @@ public abstract class Database extends RoomDatabase {
         return dbInstance.clickDao().loadAllClicks();
     }
 
+    public LiveData<List<Click>> loadClicksInRange(long timeStart, long timeEnd) {
+        return dbInstance.clickDao().loadClicksInRange(timeStart, timeEnd);
+    }
+
     public Completable saveClick(Click click) {
         return Completable.fromAction(() -> {
             dbInstance.clickDao().saveClick(click);
