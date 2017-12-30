@@ -27,8 +27,6 @@ public class ClicksRepository {
     }
 
     public void addClick(Click click) {
-        //database.saveClick(click);
-
         database.saveClick(click)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
