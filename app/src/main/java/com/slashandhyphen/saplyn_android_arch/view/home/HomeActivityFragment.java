@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.slashandhyphen.saplyn_android_arch.model.entry.EntryDatabase;
-import com.slashandhyphen.saplyn_android_arch.model.model.click.ClickRepository;
+import com.slashandhyphen.saplyn_android_arch.model.Database;
+import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
 import com.slashandhyphen.saplyn_android_arch.view_model.ClickViewModel;
 
 import com.slashandhyphen.saplyn_android_arch.R;
@@ -21,7 +21,7 @@ import com.slashandhyphen.saplyn_android_arch.R;
  * A placeholder fragment containing a simple view.
  */
 public class HomeActivityFragment extends Fragment implements View.OnClickListener {
-    private EntryDatabase database;
+    private Database database;
     private ClickRepository clickRepository;
     private ClickViewModel clickViewModel;
 
@@ -41,7 +41,7 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        database = EntryDatabase.getInstance(this.getContext());
+        database = Database.getInstance(this.getContext());
 
         clickRepository = new ClickRepository(database);
         ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);

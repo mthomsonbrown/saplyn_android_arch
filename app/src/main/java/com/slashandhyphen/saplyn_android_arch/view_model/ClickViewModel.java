@@ -5,8 +5,8 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.slashandhyphen.saplyn_android_arch.model.model.click.Click;
-import com.slashandhyphen.saplyn_android_arch.model.model.click.ClickRepository;
+import com.slashandhyphen.saplyn_android_arch.model.entry.click.Click;
+import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import javax.inject.Inject;
  */
 
 public class ClickViewModel extends ViewModel {
-    LiveData<List<Click>> clicks;
+
     private ClickRepository clickRepository;
 
     @Inject

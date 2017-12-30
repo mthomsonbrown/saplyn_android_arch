@@ -1,4 +1,4 @@
-package com.slashandhyphen.saplyn_android_arch.model.model.click;
+package com.slashandhyphen.saplyn_android_arch.model.entry.click;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
