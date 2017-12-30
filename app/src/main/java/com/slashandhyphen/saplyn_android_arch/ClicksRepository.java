@@ -26,10 +26,10 @@ public class ClicksRepository {
         return database.loadAllClicks();
     }
 
-    public void addClick() {
-        database.saveClick();
+    public void addClick(Click click) {
+        //database.saveClick(click);
 
-        database.saveClick()
+        database.saveClick(click)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thing -> Log.e(TAG, "Success writing to db"),

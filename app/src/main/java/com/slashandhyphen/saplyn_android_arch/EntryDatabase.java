@@ -61,9 +61,9 @@ public abstract class EntryDatabase extends RoomDatabase {
         return dbInstance.clickDao().loadAllClicks();
     }
 
-    public Completable saveClick() {
+    public Completable saveClick(Click click) {
         return Completable.fromAction(() -> {
-            dbInstance.clickDao().saveClick(new Click(System.currentTimeMillis()));
+            dbInstance.clickDao().saveClick(click);
         });
     }
 }

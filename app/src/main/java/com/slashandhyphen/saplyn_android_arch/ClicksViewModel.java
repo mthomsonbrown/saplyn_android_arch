@@ -37,7 +37,7 @@ public class ClicksViewModel extends ViewModel {
     }
 
     public void click() {
-        clicksRepository.addClick();
+        clicksRepository.addClick(new Click(System.currentTimeMillis()));
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
