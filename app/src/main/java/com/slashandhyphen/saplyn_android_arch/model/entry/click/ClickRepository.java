@@ -36,6 +36,7 @@ public class ClickRepository {
         database.saveClick(click)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                // TODO: This returns what I think is an error message on success...
                 .subscribe(thing -> Log.e(TAG, "Success writing to db"),
                         () -> Log.e(TAG, "Unable to update username"));
     }

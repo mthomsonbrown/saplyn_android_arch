@@ -21,6 +21,10 @@
         <activity
             android:name=".view.home.HomeActivity"
             android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.entry.EntryActivity"
+            android:label="@string/title_activity_entry"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
