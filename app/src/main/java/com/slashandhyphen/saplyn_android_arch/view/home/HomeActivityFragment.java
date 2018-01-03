@@ -46,7 +46,6 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
         ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);
         clickViewModel = ViewModelProviders.of(this, factory)
                 .get(ClickViewModel.class);
-        clickViewModel = ViewModelProviders.of(this).get(ClickViewModel.class);
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
