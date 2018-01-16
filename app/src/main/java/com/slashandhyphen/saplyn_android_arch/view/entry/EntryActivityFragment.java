@@ -77,7 +77,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_click) {
-            Toast.makeText(this.getActivity(), "Clicked the button", Toast.LENGTH_LONG).show();
+            clickViewModel.click();
         }
     }
 }
