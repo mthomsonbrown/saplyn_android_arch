@@ -1,9 +1,8 @@
 package com.slashandhyphen.saplyn_android_arch.view.splash;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,7 @@ import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.view.home.HomeActivity;
 
 
-public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
+public class SplashActivity extends Activity implements View.OnClickListener {
 
     Button button_home;
 
@@ -21,8 +20,6 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         button_home = findViewById(R.id.button_home);
         button_home.setOnClickListener(this);
     }

@@ -1,10 +1,10 @@
 package com.slashandhyphen.saplyn_android_arch.view_model;
 
-import android.support.annotation.NonNull;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.util.Log;
 
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.Click;
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
@@ -47,13 +47,37 @@ public class ClickViewModel extends ViewModel {
         });
     }
 
+    // TODO: Make this respond correctly to the 'endHour'
     public LiveData<String> getStringClicksPerDay() {
+        // Test EndOfDay
+        int endHour = 5;
+        int theEndHour = endHour;
+        long timeStart, timeEnd;
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        long timeStart = calendar.getTimeInMillis();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        long timeEnd = calendar.getTimeInMillis();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        if(calendar.get(Calendar.HOUR_OF_DAY) > theEndHour) {
+            calendar.set(Calendar.HOUR_OF_DAY, theEndHour);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            timeStart = calendar.getTimeInMillis();
+        }
+        else {
+            calendar.set(Calendar.HOUR_OF_DAY, theEndHour);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.add(Calendar.HOUR_OF_DAY, -24);
+            timeStart = calendar.getTimeInMillis();
+        }
+        calendar.add(Calendar.HOUR_OF_DAY, 24);
+        timeEnd = calendar.getTimeInMillis();
+
+        Calendar debugCalc = Calendar.getInstance();
+        debugCalc.setTimeInMillis(timeStart);
+        Log.e("Time Start: ", debugCalc.getTime().toString());
+        debugCalc.setTimeInMillis(timeEnd);
+        Log.e("Time End: ", debugCalc.getTime().toString());
 
         return Transformations.map(clickRepository.getClicksInRange(timeStart, timeEnd), clicks -> {
             if(clicks != null) {
