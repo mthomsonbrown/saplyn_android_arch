@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.Database;
@@ -55,6 +55,8 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         clickList = new ArrayList<>();
         Button clickButton = layout.findViewById(R.id.button_click);
         clickButton.setOnClickListener(this);
+        TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
+        TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
 
         // Prepare RecyclerView
         adapter = new EntryAdapter(clickList);
@@ -62,6 +64,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(adapter);
 
+        // Populate views
         clickViewModel.getClicks().observe(this, clicks -> {
 
             // TODO: Use more efficient method
@@ -69,6 +72,10 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
             clickList.addAll(clicks);
             adapter.notifyDataSetChanged();
         });
+
+        clickViewModel.getStringClicksPerDay().observe(this, textClicksDaily::setText);
+
+        clickViewModel.getStringClicks().observe(this, textClicksTotal::setText);
 
         // Return
         return layout;

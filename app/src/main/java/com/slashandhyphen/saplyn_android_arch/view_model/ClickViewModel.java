@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 /**
  * Created by Mike on 12/27/2017.
  */

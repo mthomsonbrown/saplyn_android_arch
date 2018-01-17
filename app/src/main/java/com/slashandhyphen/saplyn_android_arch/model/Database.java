@@ -8,6 +8,8 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
+import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySetDao;
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.Click;
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickDao;
 
@@ -19,10 +21,13 @@ import rx.Completable;
  * Created by Mike on 12/27/2017.
  */
 
-@android.arch.persistence.room.Database(entities = {Click.class}, version = 1)
+@android.arch.persistence.room.Database(entities = {Click.class, EntrySet.class}, version = 1)
 public abstract class Database extends RoomDatabase {
-    public abstract ClickDao clickDao();
     private static Database dbInstance;
+
+    public abstract ClickDao clickDao();
+    public abstract EntrySetDao entrySetDao();
+
     private static final String DATABASE_NAME = "entry-db";
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
@@ -59,6 +64,7 @@ public abstract class Database extends RoomDatabase {
         mIsDatabaseCreated.postValue(true);
     }
 
+    // Click methods
     public LiveData<List<Click>> loadAllClicks() {
         return dbInstance.clickDao().loadAllClicks();
     }
@@ -70,6 +76,17 @@ public abstract class Database extends RoomDatabase {
     public Completable saveClick(Click click) {
         return Completable.fromAction(() -> {
             dbInstance.clickDao().saveClick(click);
+        });
+    }
+
+    // Entryset methods
+    public LiveData<List<EntrySet>> loadAllEntrySets() {
+        return dbInstance.entrySetDao().loadAllEntrySets();
+    }
+
+    public Completable saveEntrySet(EntrySet entrySet) {
+        return Completable.fromAction(() -> {
+            dbInstance.entrySetDao().saveEntrySet(entrySet);
         });
     }
 }

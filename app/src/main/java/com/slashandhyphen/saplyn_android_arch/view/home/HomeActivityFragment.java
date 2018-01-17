@@ -1,23 +1,29 @@
 package com.slashandhyphen.saplyn_android_arch.view.home;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-
 
 import com.slashandhyphen.saplyn_android_arch.model.Database;
-import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
-import com.slashandhyphen.saplyn_android_arch.view.entry.EntryActivity;
-import com.slashandhyphen.saplyn_android_arch.view_model.ClickViewModel;
+import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
+import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySetRepository;
 
 import com.slashandhyphen.saplyn_android_arch.R;
+import com.slashandhyphen.saplyn_android_arch.view.entry.EntryActivity;
+import com.slashandhyphen.saplyn_android_arch.view_model.EntrySetViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,10 +31,10 @@ import com.slashandhyphen.saplyn_android_arch.R;
 public class HomeActivityFragment extends Fragment implements View.OnClickListener {
     private HomeActivity activity;
 
-    private ClickViewModel clickViewModel;
-
-    private TextView textClicks;
-    private TextView textClicksTotal;
+    RecyclerView recycler;
+    EntrySetAdapter adapter;
+    List<EntrySet> entrySetList;
+    EntrySetViewModel entrySetViewModel;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -41,28 +47,34 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
         // Grab Handles: Framework
         activity = (HomeActivity) getActivity();
-        Database database = Database.getInstance(this.getContext());
-        ClickRepository clickRepository = new ClickRepository(database);
-        ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);
-        clickViewModel = ViewModelProviders.of(this, factory)
-                .get(ClickViewModel.class);
+        Database database = Database.getInstance(this.getActivity());
+        EntrySetRepository entrySetRepository = new EntrySetRepository(database);
+        EntrySetViewModel.Factory factory = new EntrySetViewModel.Factory(entrySetRepository);
+        entrySetViewModel = ViewModelProviders.of(this, factory).get(EntrySetViewModel.class);
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
                 R.layout.fragment_home, container, false);
-        Button buttonClick = layout.findViewById(R.id.button_click);
-        buttonClick.setOnClickListener(this);
         Button buttonEntries = layout.findViewById(R.id.button_entries);
         buttonEntries.setOnClickListener(this);
-        textClicks = layout.findViewById(R.id.text_clicks);
-        textClicksTotal = layout.findViewById(R.id.text_total_clicks);
+        Button buttonAddEntrySet = layout.findViewById(R.id.button_new_entry_set);
+        buttonAddEntrySet.setOnClickListener(this);
+        recycler = layout.findViewById(R.id.recycler_view_entry_sets);
+        entrySetList = new ArrayList<>();
 
-        // Populate View
-        clickViewModel.getStringClicksPerDay().observe(this, clicks -> {
-            textClicks.setText(clicks);
-        });
-        clickViewModel.getStringClicks().observe(this, clicks -> {
-            textClicksTotal.setText(clicks);
+        // Prepare RecyclerView
+        adapter = new EntrySetAdapter(entrySetList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recycler.setLayoutManager(layoutManager);
+        recycler.setAdapter(adapter);
+
+        // Populate views
+        entrySetViewModel.getEntrySets().observe(this, entrySets -> {
+
+            // TODO: Use more efficient method
+            entrySetList.clear();
+            entrySetList.addAll(entrySets);
+            adapter.notifyDataSetChanged();
         });
 
         // Return
@@ -71,13 +83,14 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button_click) {
-            clickViewModel.click();
-        }
 
         if(v.getId() == R.id.button_entries) {
             Intent myIntent = new Intent(activity, EntryActivity.class);
             startActivity(myIntent);
+        }
+
+        if(v.getId() == R.id.button_new_entry_set) {
+            entrySetViewModel.createEntrySet("New Entry Set");
         }
     }
 }

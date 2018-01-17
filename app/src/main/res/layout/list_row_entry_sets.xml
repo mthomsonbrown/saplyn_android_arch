@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_row_entry_sets" >
+
+    <TextView
+        android:id="@+id/text_entry_set_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entry Set Name" />
+</android.support.constraint.ConstraintLayout>
