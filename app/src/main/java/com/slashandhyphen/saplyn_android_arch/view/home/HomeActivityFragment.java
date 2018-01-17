@@ -1,12 +1,14 @@
 package com.slashandhyphen.saplyn_android_arch.view.home;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -90,7 +92,11 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
         }
 
         if(v.getId() == R.id.button_new_entry_set) {
-            entrySetViewModel.createEntrySet("New Entry Set");
+            FragmentManager fm = getFragmentManager();
+            EntrySetDialogFragment dialogFragment = new EntrySetDialogFragment ();
+            dialogFragment.show(fm, "Sample Fragment");
+
+//            entrySetViewModel.createEntrySet("New Entry Set");
         }
     }
 }
