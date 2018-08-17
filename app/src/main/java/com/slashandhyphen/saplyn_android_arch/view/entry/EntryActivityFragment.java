@@ -56,6 +56,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         Button clickButton = layout.findViewById(R.id.button_click);
         clickButton.setOnClickListener(this);
         TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
+        TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
         TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
 
         // Prepare RecyclerView
@@ -73,8 +74,9 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
             adapter.notifyDataSetChanged();
         });
 
-        clickViewModel.getStringClicksPerDay().observe(this, textClicksDaily::setText);
+        clickViewModel.getStringClicksToday().observe(this, textClicksDaily::setText);
 
+        clickViewModel.getStringClicksYesterday().observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicks().observe(this, textClicksTotal::setText);
 
         // Return

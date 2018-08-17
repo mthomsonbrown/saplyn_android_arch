@@ -60,13 +60,32 @@
         app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_title" />
 
     <TextView
+        android:id="@+id/text_yesterday_clicks_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yesterday Clicks"
+        app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
+        app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
+        app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />
+
+    <TextView
+        android:id="@+id/text_yesterday_clicks_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_title"
+        app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_title"
+        tools:ignore="DuplicateIds" />
+
+    <TextView
         android:id="@+id/text_total_clicks_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Clicks"
-        app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
-        app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
-        app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />
+        app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_number"
+        app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_number"
+        app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_number" />
 
     <TextView
         android:id="@+id/text_total_clicks_number"

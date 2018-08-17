@@ -21,6 +21,8 @@ import javax.inject.Inject;
 
 public class ClickViewModel extends ViewModel {
 
+    int offset = 5;  // Number of hours past midnight to include in a day report
+
     private ClickRepository clickRepository;
 
     @Inject
@@ -46,44 +48,67 @@ public class ClickViewModel extends ViewModel {
         });
     }
 
-    // TODO: Make this respond correctly to the 'endHour'
-    public LiveData<String> getStringClicksPerDay() {
-        // Test EndOfDay
-        int endHour = 5;
-        int theEndHour = endHour;
-        long timeStart, timeEnd;
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if(calendar.get(Calendar.HOUR_OF_DAY) > theEndHour) {
-            calendar.set(Calendar.HOUR_OF_DAY, theEndHour);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            timeStart = calendar.getTimeInMillis();
-        }
-        else {
-            calendar.set(Calendar.HOUR_OF_DAY, theEndHour);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.add(Calendar.HOUR_OF_DAY, -24);
-            timeStart = calendar.getTimeInMillis();
-        }
-        calendar.add(Calendar.HOUR_OF_DAY, 24);
-        timeEnd = calendar.getTimeInMillis();
-
-        Calendar debugCalc = Calendar.getInstance();
-        debugCalc.setTimeInMillis(timeStart);
-        Log.e("Time Start: ", debugCalc.getTime().toString());
-        debugCalc.setTimeInMillis(timeEnd);
-        Log.e("Time End: ", debugCalc.getTime().toString());
-
+    /**
+     *
+     * @param timeStart Beginning of range to report in epoch milliseconds
+     * @param timeEnd End of range to report in epoch milliseconds
+     * @return The number of clicks in the time frame
+     */
+    public LiveData<String> getStringClicksInRange(long timeStart, long timeEnd) {
         return Transformations.map(clickRepository.getClicksInRange(timeStart, timeEnd), clicks -> {
             if(clicks != null) {
                 return Integer.toString(clicks.size());
             }
             else return "0";
         });
+    }
+
+    /**
+     *
+     * @param numDaysBefore Number of days before today to return the start time of
+     * @return Epoch milliseconds of the start time
+     */
+    private long getTimeStart(int numDaysBefore) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.DAY_OF_YEAR, -numDaysBefore);
+        if(calendar.get(Calendar.HOUR_OF_DAY) > offset) {
+            calendar.set(Calendar.HOUR_OF_DAY, offset);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            return calendar.getTimeInMillis();
+        }
+        calendar.set(Calendar.HOUR_OF_DAY, offset);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.add(Calendar.HOUR_OF_DAY, -24);
+        return calendar.getTimeInMillis();
+    }
+
+    /**
+     *
+     * @param numDaysBefore Number of days before today to return the end time of
+     * @return Epoch milliseconds of the end times
+     */
+    private long getTimeEnd(int numDaysBefore) {
+        long timeStart = getTimeStart(numDaysBefore);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeStart);
+        calendar.add(Calendar.HOUR_OF_DAY, 24);
+        return calendar.getTimeInMillis();
+    }
+
+    public LiveData<String> getStringClicksYesterday() {
+        long timeStart = getTimeStart(1);
+        long timeEnd = getTimeEnd(1);
+        return getStringClicksInRange(timeStart, timeEnd);
+    }
+
+    public LiveData<String> getStringClicksToday() {
+
+        long timeStart = getTimeStart(0);
+        long timeEnd = getTimeEnd(0);
+        return getStringClicksInRange(timeStart, timeEnd);
     }
 
     public void click() {
