@@ -39,7 +39,11 @@ public class ClickViewModel extends ViewModel {
         });
     }
 
-    public LiveData<String> getStringClicks() {
+    /**
+     *
+     * @return The total number of clicks.
+     */
+    public LiveData<String> getStringClicksTotal() {
         return Transformations.map(clickRepository.getClicks(), clicks -> {
             if(clicks != null) {
                 return Integer.toString(clicks.size());
@@ -98,16 +102,15 @@ public class ClickViewModel extends ViewModel {
         return calendar.getTimeInMillis();
     }
 
-    public LiveData<String> getStringClicksYesterday() {
-        long timeStart = getTimeStart(1);
-        long timeEnd = getTimeEnd(1);
-        return getStringClicksInRange(timeStart, timeEnd);
-    }
-
-    public LiveData<String> getStringClicksToday() {
-
-        long timeStart = getTimeStart(0);
-        long timeEnd = getTimeEnd(0);
+    /**
+     * Gather how many clicks happened in a day.
+     *
+     * @param daysBeforeToday Number of days before today to return the number of clicks of.
+     * @return Number of clicks that happened on that day.
+     */
+    public LiveData<String> getStringClicksForDay(int daysBeforeToday) {
+        long timeStart = getTimeStart(daysBeforeToday);
+        long timeEnd = getTimeEnd(daysBeforeToday);
         return getStringClicksInRange(timeStart, timeEnd);
     }
 

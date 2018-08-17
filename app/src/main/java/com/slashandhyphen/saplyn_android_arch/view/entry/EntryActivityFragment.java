@@ -74,10 +74,10 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
             adapter.notifyDataSetChanged();
         });
 
-        clickViewModel.getStringClicksToday().observe(this, textClicksDaily::setText);
+        clickViewModel.getStringClicksForDay(0).observe(this, textClicksDaily::setText);
 
-        clickViewModel.getStringClicksYesterday().observe(this, textClicksYesterday::setText);
-        clickViewModel.getStringClicks().observe(this, textClicksTotal::setText);
+        clickViewModel.getStringClicksForDay(1).observe(this, textClicksYesterday::setText);
+        clickViewModel.getStringClicksTotal().observe(this, textClicksTotal::setText);
 
         // Return
         return layout;
