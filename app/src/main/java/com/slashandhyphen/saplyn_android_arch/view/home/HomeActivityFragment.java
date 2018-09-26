@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.slashandhyphen.saplyn_android_arch.model.Database;
 import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
@@ -65,7 +66,7 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
         entrySetList = new ArrayList<>();
 
         // Prepare RecyclerView
-        adapter = new EntrySetAdapter(entrySetList);
+        adapter = new EntrySetAdapter(entrySetList, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(adapter);
@@ -86,6 +87,7 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
+        Toast.makeText(getActivity(), "got click", Toast.LENGTH_LONG).show();
         if(v.getId() == R.id.button_entries) {
             Intent myIntent = new Intent(activity, EntryActivity.class);
             startActivity(myIntent);

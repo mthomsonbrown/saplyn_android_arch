@@ -2,6 +2,8 @@
   <dictionary name="Mike">
     <words>
       <w>journaling</w>
+      <w>taggable</w>
+      <w>trackable</w>
     </words>
   </dictionary>
 </component>

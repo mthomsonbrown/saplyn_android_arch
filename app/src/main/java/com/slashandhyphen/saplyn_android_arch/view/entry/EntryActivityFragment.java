@@ -75,7 +75,6 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         });
 
         clickViewModel.getStringClicksForDay(0).observe(this, textClicksDaily::setText);
-
         clickViewModel.getStringClicksForDay(1).observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicksTotal().observe(this, textClicksTotal::setText);
 

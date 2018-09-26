@@ -106,6 +106,7 @@ public class ClickViewModel extends ViewModel {
      * Gather how many clicks happened in a day.
      *
      * @param daysBeforeToday Number of days before today to return the number of clicks of.
+     *                        Set to 0 for number of clicks today.
      * @return Number of clicks that happened on that day.
      */
     public LiveData<String> getStringClicksForDay(int daysBeforeToday) {
