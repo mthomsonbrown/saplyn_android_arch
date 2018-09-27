@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
@@ -45,8 +46,19 @@ public class EntrySetAdapter extends RecyclerView.Adapter<EntrySetAdapter.EntryS
         EntrySet entrySet = entrySetList.get(position);
 
         holder.entrySetName.setText(entrySet.name);
-        holder.itemView.setOnClickListener(listener);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View itemView) {
+                Toast.makeText(
+                            itemView.getContext(),
+                        "got a click: " + holder.entrySetName.getText(),
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

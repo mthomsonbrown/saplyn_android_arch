@@ -20,3 +20,14 @@ understand it after I've got my head back in android, but looking at it now, it 
 classes/methods said what their purposes were in the system, maybe even a diagram...
 
 9/25/2018:
+Well, I got the recycler view to respond to click events in the home activity, but it's only 
+recognized as a recycler view, rather than an individual item.  Leaving it for now, but my current 
+thought is that if all the items in the RecyclerView extended View, I could possibly attach the 
+onClickListener to them individually, which should give me the right ID. 
+
+9/26/2018:
+Well, I can get the name of the view that was hit now.  I put the onClickListener inside the 
+EntrySetAdapter.  I'm not sure if that's necessary, and I'm not sure how I feel about it, but it's 
+a good step forward.  The next thing to do would be to spawn a generic entry set detail event, 
+passing in the entry set object...and also make the views inside the recycler view bigger.  They 
+are a pain to click right now...

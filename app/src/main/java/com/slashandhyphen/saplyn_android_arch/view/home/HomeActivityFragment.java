@@ -86,8 +86,6 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-
-        Toast.makeText(getActivity(), "got click", Toast.LENGTH_LONG).show();
         if(v.getId() == R.id.button_entries) {
             Intent myIntent = new Intent(activity, EntryActivity.class);
             startActivity(myIntent);
