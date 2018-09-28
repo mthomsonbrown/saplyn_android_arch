@@ -1,5 +1,6 @@
 package com.slashandhyphen.saplyn_android_arch.view.home;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
+import com.slashandhyphen.saplyn_android_arch.view.entry.EntryActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,11 +28,9 @@ import java.util.List;
 public class EntrySetAdapter extends RecyclerView.Adapter<EntrySetAdapter.EntrySetViewHolder> {
 
     private List<EntrySet> entrySetList;
-    private View.OnClickListener listener;
 
     public EntrySetAdapter(List<EntrySet> entrySetList, View.OnClickListener listener) {
         this.entrySetList = entrySetList;
-        this.listener = listener;
     }
 
     @Override
@@ -50,11 +50,9 @@ public class EntrySetAdapter extends RecyclerView.Adapter<EntrySetAdapter.EntryS
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View itemView) {
-                Toast.makeText(
-                            itemView.getContext(),
-                        "got a click: " + holder.entrySetName.getText(),
-                        Toast.LENGTH_SHORT
-                ).show();
+                Intent myIntent = new Intent(itemView.getContext(), EntryActivity.class);
+                myIntent.putExtra("entrySetId", entrySet.id);
+                itemView.getContext().startActivity(myIntent);
             }
         });
     }

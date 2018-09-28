@@ -31,3 +31,10 @@ EntrySetAdapter.  I'm not sure if that's necessary, and I'm not sure how I feel 
 a good step forward.  The next thing to do would be to spawn a generic entry set detail event, 
 passing in the entry set object...and also make the views inside the recycler view bigger.  They 
 are a pain to click right now...
+
+Well, I got the entryset items to appear bigger...
+
+It looks like the current clicks view is accessing a table called clicks, so it won't be very
+straightforward to create individual click lists.  I need to edit the DB schema.  My thought now is
+to have the entryset table item's id be a foreign key in the clicks table, and then the clicks
+table will need to expand to contain columns for more sophisticated clicks...ugh

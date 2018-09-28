@@ -2,6 +2,7 @@ package com.slashandhyphen.saplyn_android_arch.view.entry;
 
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.Database;
@@ -32,6 +34,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
     EntryAdapter adapter;
     List<Click> clickList;
     ClickViewModel clickViewModel;
+    int entrySetId;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -78,6 +81,14 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         clickViewModel.getStringClicksForDay(1).observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicksTotal().observe(this, textClicksTotal::setText);
 
+        Intent myIntent = getActivity().getIntent();
+        entrySetId = myIntent.getIntExtra("entrySetId", -1);
+
+        Toast.makeText(
+                getContext(),
+                "got a click: " + entrySetId,
+                Toast.LENGTH_SHORT
+        ).show();
         // Return
         return layout;
     }

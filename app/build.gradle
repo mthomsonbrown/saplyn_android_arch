@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.slashandhyphen.saplyn_android_arch"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -19,6 +19,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
     }
 }
 
@@ -42,14 +44,12 @@ dependencies {
     testImplementation 'android.arch.core:core-testing:1.0.0'
     // Test helpers for Room
     testImplementation 'android.arch.persistence.room:testing:1.0.0'
-
     // Dagger 2 stuff
-    compile "com.google.dagger:dagger:2.11"
+    compile 'com.google.dagger:dagger:2.11'
     annotationProcessor "com.google.dagger:dagger-compiler:2.8"
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'
-
     // RxJava
-    compile group: 'io.reactivex', name: 'rxandroid', version: '1.2.1'
-    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.8'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
 }
