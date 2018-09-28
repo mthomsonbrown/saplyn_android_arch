@@ -96,7 +96,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_click) {
-            clickViewModel.click();
+            clickViewModel.click(entrySetId);
         }
     }
 }

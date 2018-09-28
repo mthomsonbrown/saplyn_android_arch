@@ -115,12 +115,12 @@ public class ClickViewModel extends ViewModel {
         return getStringClicksInRange(timeStart, timeEnd);
     }
 
-    public void click() {
-        clickRepository.addClick(new Click(System.currentTimeMillis()));
+    public void click(int entrySetId) {
+        clickRepository.addClick(new Click(entrySetId, System.currentTimeMillis()));
     }
 
-    public void click(long time) {
-        clickRepository.addClick(new Click(time));
+    public void click(int entrySetId, long time) {
+        clickRepository.addClick(new Click(entrySetId, time));
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

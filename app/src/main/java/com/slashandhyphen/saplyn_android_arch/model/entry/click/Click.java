@@ -11,9 +11,11 @@ import android.arch.persistence.room.PrimaryKey;
 public class Click {
     @PrimaryKey(autoGenerate = true)
     public Integer id;
+    public Integer foreignId;
     public long time;
 
-    public Click(long time) {
+    public Click(int foreignId, long time) {
+        this.foreignId = foreignId;
         this.time = time;
     }
 }

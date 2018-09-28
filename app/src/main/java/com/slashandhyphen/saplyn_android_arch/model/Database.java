@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -21,7 +22,7 @@ import rx.Completable;
  * Created by Mike on 12/27/2017.
  */
 
-@android.arch.persistence.room.Database(entities = {Click.class, EntrySet.class}, version = 1)
+@android.arch.persistence.room.Database(entities = {Click.class, EntrySet.class}, version = 2)
 public abstract class Database extends RoomDatabase {
     private static Database dbInstance;
 
@@ -31,6 +32,13 @@ public abstract class Database extends RoomDatabase {
     private static final String DATABASE_NAME = "entry-db";
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE clicks ADD COLUMN foreignId INTEGER");
+        }
+    };
 
     public static Database getInstance(final Context context) {
         if (dbInstance == null) {
@@ -46,6 +54,7 @@ public abstract class Database extends RoomDatabase {
 
     private static Database buildDatabase(final Context appContext) {
         return Room.databaseBuilder(appContext, Database.class, DATABASE_NAME)
+                .addMigrations(MIGRATION_1_2)
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
