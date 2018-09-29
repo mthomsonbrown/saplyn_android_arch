@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class EntryActivityFragment extends Fragment implements View.OnClickListener {
+public class EntryActivitySingleClickFragment extends Fragment implements View.OnClickListener {
     RecyclerView recycler;
     EntryAdapter adapter;
     List<Click> clickList;
@@ -50,7 +50,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
-                R.layout.fragment_entry, container, false);
+                R.layout.fragment_single_click_entry, container, false);
         recycler = layout.findViewById(R.id.recycler_view_entries);
         clickList = new ArrayList<>();
         Button clickButton = layout.findViewById(R.id.button_click);

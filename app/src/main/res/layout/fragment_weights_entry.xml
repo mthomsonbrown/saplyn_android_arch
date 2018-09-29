@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.slashandhyphen.saplyn_android_arch.view.entry.EntryActivity"
+    tools:showIn="@layout/activity_entry">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Machine Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a Set"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_entries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/text_daily_clicks_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/text_daily_clicks_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Daily Clicks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_daily_clicks_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_title"
+        app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_title" />
+
+    <TextView
+        android:id="@+id/text_yesterday_clicks_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yesterday Clicks"
+        app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
+        app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
+        app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />
+
+    <TextView
+        android:id="@+id/text_yesterday_clicks_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_title"
+        app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_title"
+        tools:ignore="DuplicateIds" />
+
+    <TextView
+        android:id="@+id/text_total_clicks_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Clicks"
+        app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_number"
+        app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_number"
+        app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_number" />
+
+    <TextView
+        android:id="@+id/text_total_clicks_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/text_total_clicks_title"
+        app:layout_constraintStart_toStartOf="@+id/text_total_clicks_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_total_clicks_title" />
+
+
+</android.support.constraint.ConstraintLayout>
