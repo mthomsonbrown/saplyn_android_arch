@@ -45,14 +45,8 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Intent myIntent = getActivity().getIntent();
-        entrySetId = myIntent.getIntExtra("entrySetId", -1);
-
-        // Grab Handles: Framework
-        Database database = Database.getInstance(this.getActivity());
-        ClickRepository clickRepository = new ClickRepository(database);
-        ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);
-        clickViewModel = ViewModelProviders.of(this, factory).get(ClickViewModel.class);
+        entrySetId = getEntrySetId();
+        clickViewModel = getClickViewModel();
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
@@ -91,6 +85,18 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         ).show();
         // Return
         return layout;
+    }
+
+    private int getEntrySetId() {
+        Intent myIntent = getActivity().getIntent();
+        return myIntent.getIntExtra("entrySetId", -1);
+    }
+
+    private ClickViewModel getClickViewModel() {
+        Database database = Database.getInstance(this.getActivity());
+        ClickRepository clickRepository = new ClickRepository(database);
+        ClickViewModel.Factory factory = new ClickViewModel.Factory(clickRepository);
+        return ViewModelProviders.of(this, factory).get(ClickViewModel.class);
     }
 
     @Override
