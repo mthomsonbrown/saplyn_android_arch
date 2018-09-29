@@ -11,7 +11,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Click {
     @PrimaryKey(autoGenerate = true)
     public Integer id;
-    public Integer foreignId;
+    public int foreignId;
     public long time;
 
     public Click(int foreignId, long time) {

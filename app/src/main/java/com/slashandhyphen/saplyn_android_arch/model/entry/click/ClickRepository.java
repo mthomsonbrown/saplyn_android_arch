@@ -23,13 +23,13 @@ public class ClickRepository {
         this.database = database;
     }
 
-    public LiveData<List<Click>> getClicks() {
+    public LiveData<List<Click>> getClicks(int foreignId) {
 
-        return database.loadAllClicks();
+        return database.loadAllClicks(foreignId);
     }
 
-    public LiveData<List<Click>> getClicksInRange(long timeStart, long timeEnd) {
-        return database.loadClicksInRange(timeStart, timeEnd);
+    public LiveData<List<Click>> getClicksInRange(int foreignId, long timeStart, long timeEnd) {
+        return database.loadClicksInRange(foreignId, timeStart, timeEnd);
     }
 
     public void addClick(Click click) {

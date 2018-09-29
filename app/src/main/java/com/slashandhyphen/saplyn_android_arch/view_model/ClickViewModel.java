@@ -30,8 +30,8 @@ public class ClickViewModel extends ViewModel {
         this.clickRepository = clickRepository;
     }
 
-    public LiveData<List<Click>> getClicks() {
-        return Transformations.map(clickRepository.getClicks(), clicks -> {
+    public LiveData<List<Click>> getClicks(int foreignId) {
+        return Transformations.map(clickRepository.getClicks(foreignId), clicks -> {
             if(clicks != null) {
                 return clicks;
             }
@@ -43,8 +43,8 @@ public class ClickViewModel extends ViewModel {
      *
      * @return The total number of clicks.
      */
-    public LiveData<String> getStringClicksTotal() {
-        return Transformations.map(clickRepository.getClicks(), clicks -> {
+    public LiveData<String> getStringClicksTotal(int foreignId) {
+        return Transformations.map(clickRepository.getClicks(foreignId), clicks -> {
             if(clicks != null) {
                 return Integer.toString(clicks.size());
             }
@@ -58,8 +58,8 @@ public class ClickViewModel extends ViewModel {
      * @param timeEnd End of range to report in epoch milliseconds
      * @return The number of clicks in the time frame
      */
-    public LiveData<String> getStringClicksInRange(long timeStart, long timeEnd) {
-        return Transformations.map(clickRepository.getClicksInRange(timeStart, timeEnd), clicks -> {
+    public LiveData<String> getStringClicksInRange(int foreignId, long timeStart, long timeEnd) {
+        return Transformations.map(clickRepository.getClicksInRange(foreignId, timeStart, timeEnd), clicks -> {
             if(clicks != null) {
                 return Integer.toString(clicks.size());
             }
@@ -109,10 +109,10 @@ public class ClickViewModel extends ViewModel {
      *                        Set to 0 for number of clicks today.
      * @return Number of clicks that happened on that day.
      */
-    public LiveData<String> getStringClicksForDay(int daysBeforeToday) {
+    public LiveData<String> getStringClicksForDay(int foreignId, int daysBeforeToday) {
         long timeStart = getTimeStart(daysBeforeToday);
         long timeEnd = getTimeEnd(daysBeforeToday);
-        return getStringClicksInRange(timeStart, timeEnd);
+        return getStringClicksInRange(foreignId, timeStart, timeEnd);
     }
 
     public void click(int entrySetId) {

@@ -33,7 +33,7 @@ public abstract class Database extends RoomDatabase {
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE clicks ADD COLUMN foreignId INTEGER");
@@ -74,12 +74,12 @@ public abstract class Database extends RoomDatabase {
     }
 
     // Click methods
-    public LiveData<List<Click>> loadAllClicks() {
-        return dbInstance.clickDao().loadAllClicks();
+    public LiveData<List<Click>> loadAllClicks(int foreignId) {
+        return dbInstance.clickDao().loadAllClicks(foreignId);
     }
 
-    public LiveData<List<Click>> loadClicksInRange(long timeStart, long timeEnd) {
-        return dbInstance.clickDao().loadClicksInRange(timeStart, timeEnd);
+    public LiveData<List<Click>> loadClicksInRange(int foreignId, long timeStart, long timeEnd) {
+        return dbInstance.clickDao().loadClicksInRange(foreignId, timeStart, timeEnd);
     }
 
     public Completable saveClick(Click click) {

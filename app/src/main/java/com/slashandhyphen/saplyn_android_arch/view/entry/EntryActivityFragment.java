@@ -45,6 +45,9 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Intent myIntent = getActivity().getIntent();
+        entrySetId = myIntent.getIntExtra("entrySetId", -1);
+
         // Grab Handles: Framework
         Database database = Database.getInstance(this.getActivity());
         ClickRepository clickRepository = new ClickRepository(database);
@@ -69,7 +72,7 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
         recycler.setAdapter(adapter);
 
         // Populate views
-        clickViewModel.getClicks().observe(this, clicks -> {
+        clickViewModel.getClicks(entrySetId).observe(this, clicks -> {
 
             // TODO: Use more efficient method
             clickList.clear();
@@ -77,12 +80,9 @@ public class EntryActivityFragment extends Fragment implements View.OnClickListe
             adapter.notifyDataSetChanged();
         });
 
-        clickViewModel.getStringClicksForDay(0).observe(this, textClicksDaily::setText);
-        clickViewModel.getStringClicksForDay(1).observe(this, textClicksYesterday::setText);
-        clickViewModel.getStringClicksTotal().observe(this, textClicksTotal::setText);
-
-        Intent myIntent = getActivity().getIntent();
-        entrySetId = myIntent.getIntExtra("entrySetId", -1);
+        clickViewModel.getStringClicksForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
+        clickViewModel.getStringClicksForDay(entrySetId, 1).observe(this, textClicksYesterday::setText);
+        clickViewModel.getStringClicksTotal(entrySetId).observe(this, textClicksTotal::setText);
 
         Toast.makeText(
                 getContext(),

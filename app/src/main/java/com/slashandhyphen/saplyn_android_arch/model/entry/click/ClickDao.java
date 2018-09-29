@@ -17,9 +17,9 @@ public interface ClickDao {
     @Insert(onConflict = REPLACE)
     void saveClick(Click click);
 
-    @Query("SELECT * FROM clicks")
-    LiveData<List<Click>> loadAllClicks();
+    @Query("SELECT * FROM clicks WHERE foreignId=:foreignId")
+    LiveData<List<Click>> loadAllClicks(Integer foreignId);
 
-    @Query(("SELECT * FROM clicks WHERE time BETWEEN :timeStart AND :timeEnd"))
-    LiveData<List<Click>> loadClicksInRange(long timeStart, long timeEnd);
+    @Query(("SELECT * FROM clicks WHERE foreignId=:foreignId AND time BETWEEN :timeStart AND :timeEnd"))
+    LiveData<List<Click>> loadClicksInRange(Integer foreignId, long timeStart, long timeEnd);
 }
