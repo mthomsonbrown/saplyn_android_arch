@@ -25,19 +25,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_entries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/text_daily_clicks_title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title">
-
-    </android.support.v7.widget.RecyclerView>
-
     <TextView
         android:id="@+id/text_daily_clicks_title"
         android:layout_width="wrap_content"
@@ -63,7 +50,7 @@
         android:id="@+id/text_yesterday_clicks_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lifted This Week"
+        android:text="Seven Day Total"
         app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
         app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
         app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />

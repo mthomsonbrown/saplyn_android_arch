@@ -57,21 +57,6 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
         TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
         TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
 
-        // Prepare RecyclerView
-        adapter = new EntryAdapter(clickList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recycler.setLayoutManager(layoutManager);
-        recycler.setAdapter(adapter);
-
-        // Populate views
-        clickViewModel.getClicks(entrySetId).observe(this, clicks -> {
-
-            // TODO: Use more efficient method
-            clickList.clear();
-            clickList.addAll(clicks);
-            adapter.notifyDataSetChanged();
-        });
-
         clickViewModel.getStringClicksForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
         clickViewModel.getStringClicksForDay(entrySetId, 1).observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicksTotal(entrySetId).observe(this, textClicksTotal::setText);
