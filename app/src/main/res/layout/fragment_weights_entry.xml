@@ -45,7 +45,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Daily Clicks"
+        android:text="Lifted Today"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_title"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
         android:id="@+id/text_yesterday_clicks_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yesterday Clicks"
+        android:text="Lifted This Week"
         app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
         app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
         app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />
@@ -82,7 +82,7 @@
         android:id="@+id/text_total_clicks_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Clicks"
+        android:text="Total Weight Lifted"
         app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_number"
         app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_number"
         app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_number" />

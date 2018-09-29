@@ -48,7 +48,7 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
-                R.layout.fragment_single_click_entry, container, false);
+                R.layout.fragment_weights_entry, container, false);
         recycler = layout.findViewById(R.id.recycler_view_entries);
         clickList = new ArrayList<>();
         Button clickButton = layout.findViewById(R.id.button_click);
