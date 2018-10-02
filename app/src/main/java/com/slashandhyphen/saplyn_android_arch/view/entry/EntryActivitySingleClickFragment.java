@@ -53,7 +53,7 @@ public class EntryActivitySingleClickFragment extends Fragment implements View.O
                 R.layout.fragment_single_click_entry, container, false);
         recycler = layout.findViewById(R.id.recycler_view_entries);
         clickList = new ArrayList<>();
-        Button clickButton = layout.findViewById(R.id.button_click);
+        Button clickButton = layout.findViewById(R.id.button_add_set);
         clickButton.setOnClickListener(this);
         TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
         TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
@@ -101,7 +101,7 @@ public class EntryActivitySingleClickFragment extends Fragment implements View.O
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button_click) {
+        if(v.getId() == R.id.button_add_set) {
             clickViewModel.click(entrySetId);
         }
     }

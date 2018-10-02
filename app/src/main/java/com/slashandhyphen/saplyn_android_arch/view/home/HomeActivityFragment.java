@@ -93,10 +93,8 @@ public class HomeActivityFragment extends Fragment implements View.OnClickListen
 
         if(v.getId() == R.id.button_new_entry_set) {
             FragmentManager fm = getFragmentManager();
-            EntrySetDialogFragment dialogFragment = new EntrySetDialogFragment ();
+            EntrySetDialogFragment dialogFragment = new EntrySetDialogFragment();
             dialogFragment.show(fm, "Sample Fragment");
-
-//            entrySetViewModel.createEntrySet("New Entry Set");
         }
     }
 }

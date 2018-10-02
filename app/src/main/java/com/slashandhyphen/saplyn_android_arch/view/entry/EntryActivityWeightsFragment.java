@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.Database;
+import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySetRepository;
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.Click;
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
 import com.slashandhyphen.saplyn_android_arch.view_model.ClickViewModel;
+import com.slashandhyphen.saplyn_android_arch.view_model.EntrySetViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +31,9 @@ import java.util.List;
  */
 public class EntryActivityWeightsFragment extends Fragment implements View.OnClickListener {
     RecyclerView recycler;
-    EntryAdapter adapter;
     List<Click> clickList;
     ClickViewModel clickViewModel;
+    EntrySetViewModel entrySetViewModel;
     int entrySetId;
 
     @Override
@@ -45,18 +47,22 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
 
         entrySetId = getEntrySetId();
         clickViewModel = getClickViewModel();
+        entrySetViewModel = getEntrySetViewModel();
 
         // Grab Handles: View Elements
         ConstraintLayout layout = (ConstraintLayout) inflater.inflate(
                 R.layout.fragment_weights_entry, container, false);
         recycler = layout.findViewById(R.id.recycler_view_entries);
         clickList = new ArrayList<>();
-        Button clickButton = layout.findViewById(R.id.button_click);
+        Button clickButton = layout.findViewById(R.id.button_add_set);
         clickButton.setOnClickListener(this);
+
+        TextView textEntryName = layout.findViewById(R.id.text_title);
         TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
         TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
         TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
 
+//        entrySetViewModel.getName(entrySetId).observe(this, textEntryName::setText);
         clickViewModel.getStringClicksForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
         clickViewModel.getStringClicksForDay(entrySetId, 1).observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicksTotal(entrySetId).observe(this, textClicksTotal::setText);
@@ -82,10 +88,20 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
         return ViewModelProviders.of(this, factory).get(ClickViewModel.class);
     }
 
+    private EntrySetViewModel getEntrySetViewModel() {
+        Database database = Database.getInstance(this.getActivity());
+        EntrySetRepository entrySetRepository = new EntrySetRepository(database);
+        EntrySetViewModel.Factory factory = new EntrySetViewModel.Factory(entrySetRepository);
+        return ViewModelProviders.of(this, factory).get(EntrySetViewModel.class);
+    }
+
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button_click) {
-            clickViewModel.click(entrySetId);
+        if(v.getId() == R.id.button_add_set) {
+//            clickViewModel.click(entrySetId);
+            FragmentManager fm = getFragmentManager();
+            WeightsSetDialogFragment dialogFragment = new WeightsSetDialogFragment();
+            dialogFragment.show(fm, "WeightSetDialogFragment");
         }
     }
 }

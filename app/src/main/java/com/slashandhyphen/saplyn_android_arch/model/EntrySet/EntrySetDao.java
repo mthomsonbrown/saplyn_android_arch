@@ -22,4 +22,7 @@ public interface EntrySetDao {
 
     @Query("SELECT * FROM entry_sets")
     LiveData<List<EntrySet>> loadAllEntrySets();
+
+    @Query("SELECT * FROM entry_sets WHERE id=:entrySetId")
+    LiveData<EntrySet> getEntrySet(int entrySetId);
 }

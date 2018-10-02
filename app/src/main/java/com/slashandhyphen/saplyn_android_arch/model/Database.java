@@ -98,4 +98,8 @@ public abstract class Database extends RoomDatabase {
             dbInstance.entrySetDao().saveEntrySet(entrySet);
         });
     }
+
+    public LiveData<EntrySet> getEntrySetName (int entrySetId) {
+        return  dbInstance.entrySetDao().getEntrySet(entrySetId);
+    }
 }

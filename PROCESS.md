@@ -38,3 +38,8 @@ It looks like the current clicks view is accessing a table called clicks, so it 
 straightforward to create individual click lists.  I need to edit the DB schema.  My thought now is
 to have the entryset table item's id be a foreign key in the clicks table, and then the clicks
 table will need to expand to contain columns for more sophisticated clicks...ugh
+
+9/28/2018:
+Well, I made a lot of progress, and also left the app completely broken...The shit in the repo
+should work just fine, but locally I tried to pull the EntrySet name from the DB and got
+pretty lost...also drunk so valid excuse

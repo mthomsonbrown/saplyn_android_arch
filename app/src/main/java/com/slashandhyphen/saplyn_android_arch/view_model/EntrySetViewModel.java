@@ -35,6 +35,16 @@ public class EntrySetViewModel extends ViewModel {
         });
     }
 
+    // TODO: Get compile errors here I don't want to deal with at the moment...
+//    public LiveData<String> getName(int entrySetId) {
+//        return Transformations.map(entrySetRepository.getName(entrySetId), name -> {
+//            if(name != null) {
+//                return name;
+//            }
+//            else return "No name found!";
+//        });
+//    }
+
     public void createEntrySet(String name) {
         entrySetRepository.addEntrySet(new EntrySet(name));
     }

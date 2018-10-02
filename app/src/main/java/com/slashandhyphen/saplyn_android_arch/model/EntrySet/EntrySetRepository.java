@@ -36,4 +36,8 @@ public class EntrySetRepository {
                 .subscribe(thing -> Log.e(TAG, "Success writing to db"),
                         () -> Log.e(TAG, "Unable to save entry set"));
     }
+
+    public LiveData<EntrySet> getName(int id) {
+        return database.getEntrySetName(id);
+    }
 }
