@@ -119,8 +119,8 @@ public class ClickViewModel extends ViewModel {
         clickRepository.addClick(new Click(entrySetId, System.currentTimeMillis()));
     }
 
-    public void click(int entrySetId, long time) {
-        clickRepository.addClick(new Click(entrySetId, time));
+    public void click(int entrySetId, Integer weight, Integer reps) {
+        clickRepository.addClick(new Click(entrySetId, System.currentTimeMillis(), weight, reps));
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

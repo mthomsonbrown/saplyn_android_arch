@@ -12,13 +12,8 @@ import android.widget.EditText;
 
 import com.slashandhyphen.saplyn_android_arch.R;
 import com.slashandhyphen.saplyn_android_arch.model.Database;
-import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySet;
 import com.slashandhyphen.saplyn_android_arch.model.EntrySet.EntrySetRepository;
-import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
-import com.slashandhyphen.saplyn_android_arch.view_model.ClickViewModel;
 import com.slashandhyphen.saplyn_android_arch.view_model.EntrySetViewModel;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Mike on 1/16/2018.
@@ -49,7 +44,7 @@ public class EntrySetDialogFragment extends DialogFragment implements View.OnCli
 
         // Grab Handles: View Elements
         textName = layout.findViewById(R.id.text_name_entry);
-        Button buttonAccept = layout.findViewById(R.id.button_add_entry_set);
+        Button buttonAccept = layout.findViewById(R.id.button_add_set);
         buttonAccept.setOnClickListener(this);
 
         // Return

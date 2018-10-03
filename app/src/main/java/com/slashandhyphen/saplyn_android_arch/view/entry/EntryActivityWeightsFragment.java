@@ -98,9 +98,11 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_add_set) {
-//            clickViewModel.click(entrySetId);
             FragmentManager fm = getFragmentManager();
             WeightsSetDialogFragment dialogFragment = new WeightsSetDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("entrySetId", entrySetId);
+            dialogFragment.setArguments(args);
             dialogFragment.show(fm, "WeightSetDialogFragment");
         }
     }

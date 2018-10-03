@@ -22,7 +22,7 @@ import rx.Completable;
  * Created by Mike on 12/27/2017.
  */
 
-@android.arch.persistence.room.Database(entities = {Click.class, EntrySet.class}, version = 2)
+@android.arch.persistence.room.Database(entities = {Click.class, EntrySet.class}, version = 3)
 public abstract class Database extends RoomDatabase {
     private static Database dbInstance;
 
@@ -37,6 +37,14 @@ public abstract class Database extends RoomDatabase {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE clicks ADD COLUMN foreignId INTEGER");
+        }
+    };
+
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE clicks ADD COLUMN weight INTEGER");
+            database.execSQL("ALTER TABLE clicks ADD COLUMN reps INTEGER");
         }
     };
 
@@ -55,6 +63,7 @@ public abstract class Database extends RoomDatabase {
     private static Database buildDatabase(final Context appContext) {
         return Room.databaseBuilder(appContext, Database.class, DATABASE_NAME)
                 .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_2_3)
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
