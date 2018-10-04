@@ -67,6 +67,19 @@ public class ClickViewModel extends ViewModel {
         });
     }
 
+    public LiveData<String> getStringWeightInRange(int foreignId, long timeStart, long timeEnd) {
+        return Transformations.map(clickRepository.getClicksInRange(foreignId, timeStart, timeEnd), clicks -> {
+            Integer weight = 0;
+            if(clicks != null) {
+                for(Click click : clicks) {
+                    weight += (click.weight * click.reps);
+                }
+                return weight.toString();
+            }
+            else return "0";
+        });
+    }
+
     /**
      *
      * @param numDaysBefore Number of days before today to return the start time of
@@ -121,6 +134,12 @@ public class ClickViewModel extends ViewModel {
 
     public void click(int entrySetId, Integer weight, Integer reps) {
         clickRepository.addClick(new Click(entrySetId, System.currentTimeMillis(), weight, reps));
+    }
+
+    public LiveData<String> getStringWeightForDay(int foreignId, int daysBeforeToday) {
+        long timeStart = getTimeStart(daysBeforeToday);
+        long timeEnd = getTimeEnd(daysBeforeToday);
+        return getStringWeightInRange(foreignId, timeStart, timeEnd);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

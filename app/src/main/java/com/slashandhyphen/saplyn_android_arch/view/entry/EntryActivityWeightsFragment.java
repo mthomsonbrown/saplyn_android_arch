@@ -58,12 +58,12 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
         clickButton.setOnClickListener(this);
 
         TextView textEntryName = layout.findViewById(R.id.text_title);
-        TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
-        TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
-        TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
+        TextView textClicksDaily = layout.findViewById(R.id.text_daily_weight);
+        TextView textClicksYesterday = layout.findViewById(R.id.text_seven_day_average);
+        TextView textClicksTotal = layout.findViewById(R.id.text_total_weight);
 
 //        entrySetViewModel.getName(entrySetId).observe(this, textEntryName::setText);
-        clickViewModel.getStringClicksForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
+        clickViewModel.getStringWeightForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
         clickViewModel.getStringClicksForDay(entrySetId, 1).observe(this, textClicksYesterday::setText);
         clickViewModel.getStringClicksTotal(entrySetId).observe(this, textClicksTotal::setText);
 

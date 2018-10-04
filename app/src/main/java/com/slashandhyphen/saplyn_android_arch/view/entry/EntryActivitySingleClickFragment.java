@@ -55,9 +55,9 @@ public class EntryActivitySingleClickFragment extends Fragment implements View.O
         clickList = new ArrayList<>();
         Button clickButton = layout.findViewById(R.id.button_add_set);
         clickButton.setOnClickListener(this);
-        TextView textClicksDaily = layout.findViewById(R.id.text_daily_clicks_number);
-        TextView textClicksYesterday = layout.findViewById(R.id.text_yesterday_clicks_number);
-        TextView textClicksTotal = layout.findViewById(R.id.text_total_clicks_number);
+        TextView textClicksDaily = layout.findViewById(R.id.text_daily_weight);
+        TextView textClicksYesterday = layout.findViewById(R.id.text_seven_day_average);
+        TextView textClicksTotal = layout.findViewById(R.id.text_total_weight);
 
         // Prepare RecyclerView
         adapter = new EntryAdapter(clickList);

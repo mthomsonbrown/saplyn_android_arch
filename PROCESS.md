@@ -43,3 +43,9 @@ table will need to expand to contain columns for more sophisticated clicks...ugh
 Well, I made a lot of progress, and also left the app completely broken...The shit in the repo
 should work just fine, but locally I tried to pull the EntrySet name from the DB and got
 pretty lost...also drunk so valid excuse
+
+10/02/2018:
+After a few other commits, right now I have a weights entry dialog that appears to push to the
+database.  The next step is using that data to populate fields.  Right now, the "Lifted Today",
+"Seven Day Total", and "Total Weight Lifted" fields are just renamed fields from the single click
+view.  They are liars!

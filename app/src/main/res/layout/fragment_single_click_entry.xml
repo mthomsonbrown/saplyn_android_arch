@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_daily_clicks_number"
+        android:id="@+id/text_daily_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -64,12 +64,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Yesterday Clicks"
-        app:layout_constraintEnd_toEndOf="@+id/text_daily_clicks_number"
-        app:layout_constraintStart_toStartOf="@+id/text_daily_clicks_number"
-        app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_number" />
+        app:layout_constraintEnd_toEndOf="@+id/text_daily_weight"
+        app:layout_constraintStart_toStartOf="@+id/text_daily_weight"
+        app:layout_constraintTop_toBottomOf="@+id/text_daily_weight" />
 
     <TextView
-        android:id="@+id/text_yesterday_clicks_number"
+        android:id="@+id/text_seven_day_average"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -83,12 +83,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Clicks"
-        app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_number"
-        app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_number"
-        app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_number" />
+        app:layout_constraintEnd_toEndOf="@+id/text_seven_day_average"
+        app:layout_constraintStart_toStartOf="@+id/text_seven_day_average"
+        app:layout_constraintTop_toBottomOf="@+id/text_seven_day_average" />
 
     <TextView
-        android:id="@+id/text_total_clicks_number"
+        android:id="@+id/text_total_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
