@@ -142,6 +142,30 @@ public class ClickViewModel extends ViewModel {
         return getStringWeightInRange(foreignId, timeStart, timeEnd);
     }
 
+    /**
+     * STUB!!!
+     *
+     * @param foreignId
+     * @return
+     */
+    public LiveData<String> getStringWeightSevenDayAverage(int foreignId) {
+        return Transformations.map(clickRepository.getClicksInRange(foreignId, 0, 0), clicks -> {
+            return "not implemented";
+        });
+    }
+
+    /**
+     * STUB!!!
+     *
+     * @param foreignId
+     * @return
+     */
+    public LiveData<String> getStringWeightTotal(int foreignId) {
+        return Transformations.map(clickRepository.getClicksInRange(foreignId, 0, 0), clicks -> {
+            return "also not implemented";
+        });
+    }
+
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
         private ClickRepository clickRepository;

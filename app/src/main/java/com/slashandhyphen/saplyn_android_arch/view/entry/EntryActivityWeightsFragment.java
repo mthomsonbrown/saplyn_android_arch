@@ -58,14 +58,14 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
         clickButton.setOnClickListener(this);
 
         TextView textEntryName = layout.findViewById(R.id.text_title);
-        TextView textClicksDaily = layout.findViewById(R.id.text_daily_weight);
-        TextView textClicksYesterday = layout.findViewById(R.id.text_seven_day_average);
-        TextView textClicksTotal = layout.findViewById(R.id.text_total_weight);
+        TextView textWeightToday = layout.findViewById(R.id.text_daily_weight);
+        TextView textSevenDayAverage = layout.findViewById(R.id.text_seven_day_average);
+        TextView textWeightTotal = layout.findViewById(R.id.text_total_weight);
 
 //        entrySetViewModel.getName(entrySetId).observe(this, textEntryName::setText);
-        clickViewModel.getStringWeightForDay(entrySetId, 0).observe(this, textClicksDaily::setText);
-        clickViewModel.getStringClicksForDay(entrySetId, 1).observe(this, textClicksYesterday::setText);
-        clickViewModel.getStringClicksTotal(entrySetId).observe(this, textClicksTotal::setText);
+        clickViewModel.getStringWeightForDay(entrySetId, 0).observe(this, textWeightToday::setText);
+        clickViewModel.getStringWeightSevenDayAverage(entrySetId).observe(this, textSevenDayAverage::setText);
+        clickViewModel.getStringWeightTotal(entrySetId).observe(this, textWeightTotal::setText);
 
         Toast.makeText(
                 getContext(),
