@@ -1,9 +1,11 @@
 package com.slashandhyphen.saplyn_android_arch.view.entry;
 
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -64,14 +66,9 @@ public class EntryActivityWeightsFragment extends Fragment implements View.OnCli
 
 //        entrySetViewModel.getName(entrySetId).observe(this, textEntryName::setText);
         clickViewModel.getStringWeightForDay(entrySetId, 0).observe(this, textWeightToday::setText);
-        clickViewModel.getStringWeightSevenDayAverage(entrySetId).observe(this, textSevenDayAverage::setText);
+        clickViewModel.getStringWeightSevenDayAverage(entrySetId, 0).observe(this, textSevenDayAverage::setText);
         clickViewModel.getStringWeightTotal(entrySetId).observe(this, textWeightTotal::setText);
 
-        Toast.makeText(
-                getContext(),
-                "got a set: " + entrySetId,
-                Toast.LENGTH_SHORT
-        ).show();
         // Return
         return layout;
     }

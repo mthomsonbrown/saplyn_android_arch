@@ -53,10 +53,10 @@
             app:layout_constraintTop_toBottomOf="@+id/text_daily_clicks_title" />
 
         <TextView
-            android:id="@+id/text_yesterday_clicks_title"
+            android:id="@+id/text_seven_day_average_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seven Day Total"
+            android:text="Seven Day Average"
             app:layout_constraintEnd_toEndOf="@+id/text_daily_weight"
             app:layout_constraintStart_toStartOf="@+id/text_daily_weight"
             app:layout_constraintTop_toBottomOf="@+id/text_daily_weight" />
@@ -66,9 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            app:layout_constraintEnd_toEndOf="@+id/text_yesterday_clicks_title"
-            app:layout_constraintStart_toStartOf="@+id/text_yesterday_clicks_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_yesterday_clicks_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_seven_day_average_title"
+            app:layout_constraintStart_toStartOf="@+id/text_seven_day_average_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_seven_day_average_title"
             tools:ignore="DuplicateIds" />
 
         <TextView

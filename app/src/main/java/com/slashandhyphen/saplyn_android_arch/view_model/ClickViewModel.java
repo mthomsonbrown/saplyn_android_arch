@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.slashandhyphen.saplyn_android_arch.model.entry.click.Click;
@@ -11,7 +12,12 @@ import com.slashandhyphen.saplyn_android_arch.model.entry.click.ClickRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -67,6 +73,27 @@ public class ClickViewModel extends ViewModel {
         });
     }
 
+    public LiveData<Integer> getIntegerWeightInRange(int foreignId, long timeStart, long timeEnd) {
+        return Transformations.map(clickRepository.getClicksInRange(foreignId, timeStart, timeEnd), clicks -> {
+            Integer weight = 0;
+            if(clicks != null) {
+                for(Click click : clicks) {
+                    weight += (click.weight * click.reps);
+                }
+                return weight;
+            }
+            else return null;
+        });
+    }
+
+    /**
+     * TODO: Have this consume getIntegerWeightInRange
+     *
+     * @param foreignId
+     * @param timeStart
+     * @param timeEnd
+     * @return
+     */
     public LiveData<String> getStringWeightInRange(int foreignId, long timeStart, long timeEnd) {
         return Transformations.map(clickRepository.getClicksInRange(foreignId, timeStart, timeEnd), clicks -> {
             Integer weight = 0;
@@ -143,14 +170,29 @@ public class ClickViewModel extends ViewModel {
     }
 
     /**
-     * STUB!!!
+     * Get average of weight lifted for the past seven days.
      *
-     * @param foreignId
-     * @return
+     * @param foreignId the id of the entry set to query.
+     * @param daysBeforeToday the last day to include in the seven day set.  Set to zero to start
+     *                        the average calculation on the current day.
+     * @return A string casted integer of the average weight lifted.
      */
-    public LiveData<String> getStringWeightSevenDayAverage(int foreignId) {
-        return Transformations.map(clickRepository.getClicksInRange(foreignId, 0, 0), clicks -> {
-            return "not implemented";
+    public LiveData<String> getStringWeightSevenDayAverage(int foreignId, int daysBeforeToday) {
+        int seven = 7;
+        long timeStart = getTimeStart(daysBeforeToday + seven);
+        long timeEnd = getTimeEnd(daysBeforeToday);
+        return Transformations.map(clickRepository.getClicksInRange(
+                    foreignId, timeStart, timeEnd), clicks -> {
+
+            Integer weight = 0;
+            if(clicks != null) {
+                for(Click click : clicks) {
+                    weight += (click.weight * click.reps);
+                }
+                Integer avg = weight / seven;
+                return avg.toString();
+            }
+            else return "0";
         });
     }
 
@@ -162,7 +204,7 @@ public class ClickViewModel extends ViewModel {
      */
     public LiveData<String> getStringWeightTotal(int foreignId) {
         return Transformations.map(clickRepository.getClicksInRange(foreignId, 0, 0), clicks -> {
-            return "also not implemented";
+            return "not implemented";
         });
     }
 
